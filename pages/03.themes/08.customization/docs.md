@@ -81,8 +81,19 @@ As discussed in the [Theme Tutorial](https://learn.getgrav.org/16/themes/theme-t
 1. [Install the DevTools plugin](https://learn.getgrav.org/16/themes/theme-tutorial#step-1-install-devtools-plugin) if it is not already done.
 2. Then follow the [Create Base Theme](https://learn.getgrav.org/16/themes/theme-tutorial#step-2-create-base-theme) procedure, but when asked to `Please choose a template type`, type `inheritance`. If Quark is the only theme, it will be displayed as option 0. So type `0` to inherit from Quark. Your new inherited theme will be created.
 3. Copy all the options from the theme YAML file you are inheriting from (or from the `user/config/themes` folder if you have customized it) at the top of the newly created YAML configuration file of your theme: `/user/themes/mytheme/mytheme.yaml`.
-4. Copy the “form” section from `/user/themes/quark/blueprints.yaml` file into `/user/themes/mytheme/blueprints.yaml` in order to include the customizable elements of the theme in the admin. (Or simply replace the file and edit its content.)
-5. Change your default theme to use your new **mytheme** by editing the `pages: theme:` option in your `user/config/system.yaml` configuration file:
+4. Add the following content (replacing `user/themes/quark` with the name of the theme you are inheriting from):
+   [prism classes="language-yaml line-numbers"]
+   streams:
+     schemes:
+       theme:
+         type: ReadOnlyStream
+         prefixes:
+           '':
+             - user/themes/mytheme
+             - user/themes/quark
+   [/prism]
+5. Copy the “form” section from `/user/themes/quark/blueprints.yaml` file into `/user/themes/mytheme/blueprints.yaml` in order to include the customizable elements of the theme in the admin. (Or simply replace the file and edit its content.)
+6. Change your default theme to use your new **mytheme** by editing the `pages: theme:` option in your `user/config/system.yaml` configuration file:
 
    [prism classes="language-yaml line-numbers"]
    pages:
